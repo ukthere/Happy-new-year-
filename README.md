@@ -1,10 +1,9 @@
-# Happy-new-year-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy New Year 2025</title>
+    <title>Happy New Year 2026</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
@@ -196,7 +195,7 @@
             color: #5733ff;
         }
         
-        /* Year display */
+        /* Year display - UPDATED TO 2026 */
         .year-container {
             margin-top: 50px;
             font-size: 8rem;
@@ -204,12 +203,13 @@
             color: rgba(255, 255, 255, 0.9);
             text-shadow: 
                 0 0 30px rgba(255, 215, 0, 0.7),
-                0 0 60px rgba(255, 87, 51, 0.5);
+                0 0 60px rgba(255, 87, 51, 0.5),
+                0 0 90px rgba(51, 153, 255, 0.4);
             font-family: 'Poppins', sans-serif;
             letter-spacing: 10px;
             position: relative;
             display: inline-block;
-            animation: glow 4s infinite alternate;
+            animation: glow 4s infinite alternate, numberChange 2s ease-out;
         }
         
         .year-container::before, .year-container::after {
@@ -231,6 +231,24 @@
         .year-container::after {
             right: -60px;
             animation: sparkle 1.5s infinite reverse;
+        }
+        
+        /* New year celebration animation */
+        .year-change {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: transparent;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 3rem;
+            color: #ffd700;
+            animation: celebrate 3s ease-out;
+            opacity: 0;
+            pointer-events: none;
         }
         
         /* Footer */
@@ -308,6 +326,20 @@
                     0 0 40px rgba(255, 215, 0, 0.9),
                     0 0 80px rgba(255, 87, 51, 0.7),
                     0 0 100px rgba(51, 255, 87, 0.4);
+            }
+        }
+        
+        @keyframes numberChange {
+            0% {
+                transform: scale(0.8);
+                opacity: 0;
+            }
+            70% {
+                transform: scale(1.1);
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1;
             }
         }
         
@@ -442,12 +474,14 @@
                 <div class="decoration-item">🥂</div>
             </div>
             
-            <div class="year-container">2025</div>
+            <!-- UPDATED YEAR TO 2026 -->
+            <div class="year-container">2026</div>
         </div>
         
         <div class="footer">
             <p>May the coming year bring you new opportunities and wonderful experiences</p>
-            <p>© <span id="current-year">2025</span> | All Rights Reserved</p>
+            <p>Welcome to 2026 - A year of new beginnings and endless possibilities!</p>
+            <p>© <span id="current-year">2026</span> | All Rights Reserved</p>
         </div>
     </div>
     
@@ -470,11 +504,46 @@
                 this.style.transform = 'scale(1.5)';
                 this.style.transition = 'transform 0.3s';
                 
+                // Create a mini celebration effect
+                const celebration = document.createElement('div');
+                celebration.innerHTML = '🎊';
+                celebration.style.position = 'absolute';
+                celebration.style.left = `${this.getBoundingClientRect().left}px`;
+                celebration.style.top = `${this.getBoundingClientRect().top}px`;
+                celebration.style.fontSize = '2rem';
+                celebration.style.zIndex = '100';
+                celebration.style.pointerEvents = 'none';
+                document.body.appendChild(celebration);
+                
+                // Animate celebration
+                celebration.animate([
+                    { transform: 'translateY(0) scale(1)', opacity: 1 },
+                    { transform: 'translateY(-50px) scale(1.5)', opacity: 0 }
+                ], {
+                    duration: 800,
+                    easing: 'ease-out'
+                });
+                
+                // Remove after animation
                 setTimeout(() => {
+                    celebration.remove();
                     this.style.transform = '';
-                }, 300);
+                }, 800);
             });
         });
+        
+        // Special 2026 celebration effect
+        setTimeout(() => {
+            const yearElement = document.querySelector('.year-container');
+            yearElement.animate([
+                { transform: 'scale(1)' },
+                { transform: 'scale(1.2)' },
+                { transform: 'scale(1)' }
+            ], {
+                duration: 1000,
+                easing: 'ease-in-out'
+            });
+        }, 2000);
     </script>
 </body>
 </html>
